@@ -68,8 +68,8 @@ function App() {
   return (
     <>
       <Header />
-      <main className="max-w-7xl w-full my-0 mx-auto px-2">
-        <div className="mb-12 flex justify-between items-center w-full">
+      <main className="max-w-7xl w-full my-0 mx-auto px-10 sm:px-4">
+        <div className="mb-12 flex flex-col items-start sm:flex-row gap-6 sm:gp-2 sm:justify-between sm:items-center w-full">
           <SearchField
             searchString={searchString}
             setSearchString={setSearchString}

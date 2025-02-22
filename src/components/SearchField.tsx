@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function SearchField({ searchString, setSearchString }: any) {
   return (
-    <div className="bg-white flex max-w-[475px] w-full items-center gap-6  px-8 shadow-md rounded-md">
+    <div className="bg-white flex shrink w-full sm:max-w-[450px] items-center gap-6  px-8 shadow-md rounded-md">
       <FontAwesomeIcon icon={faMagnifyingGlass} color="#666" />
       <input
         type="text"

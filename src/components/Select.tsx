@@ -39,7 +39,7 @@ function RegionFilter({ selectedRegion, setSelectedRegion }: any) {
   }
 
   return (
-    <div className="relative text-gray-700 select-none" ref={ref}>
+    <div className="relative text-gray-700 select-none shrink-0" ref={ref}>
       {selectedRegion !== "" && (
         <>
           <div className="w-[8px] h-[8px] absolute bg-very-dark-blue-elements rounded-full -top-0.5 -right-0.5"></div>

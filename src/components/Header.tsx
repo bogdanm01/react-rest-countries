@@ -5,7 +5,7 @@ import { memo } from "react";
 function Header() {
   return (
     <header className="w-full shadow-sm text-very-dark-blue-text bg-white mb-12">
-      <div className="max-w-7xl flex items-center justify-between px-2 py-5 my-0 mx-auto">
+      <div className="max-w-7xl flex items-center justify-between px-10 sm:px-4 py-5 my-0 mx-auto">
         <h1 className="text-2xl font-extrabold font-display">
           Where in the world?
         </h1>
