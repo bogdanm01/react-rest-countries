@@ -6,10 +6,10 @@ interface CountryCardProps {
 
 function CountryCard({ country }: CountryCardProps) {
   return (
-    <div className="shadow-sm rounded-lg cursor-pointer bg-white">
+    <div className="shadow-sm rounded-lg cursor-pointer bg-white hover:scale-[103%] transition-all">
       <img
         src={country.flags.png}
-        className="w-full h-36 bg-gray-200 rounded-t-lg"
+        className="xl:h-38 lg:max-h-40 bg-gray-200 rounded-t-lg w-full bg-cover"
       ></img>
       <div className="flex flex-col p-7 pb-10">
         <h2 className="font-bold text-lg mb-2">{country.name.common}</h2>
