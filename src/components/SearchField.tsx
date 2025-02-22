@@ -9,7 +9,7 @@ export default function SearchField({ searchString, setSearchString }: any) {
         type="text"
         value={searchString}
         onChange={(e) => setSearchString(e.target.value)}
-        className="py-[18px] border-none outline-none text-dark-blue text-sm w-full"
+        className="py-[18px] border-none outline-none text-gray-600 text-sm w-full"
         placeholder="Search for a country..."
       />
     </div>
