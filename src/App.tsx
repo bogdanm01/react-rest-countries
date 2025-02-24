@@ -9,6 +9,7 @@ import RegionFilter from "./components/Select";
 function App() {
   const [countries, setCountries] = useState<Country[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
   const [searchString, setSearchString] = useState<string>("");
   const [selectedRegion, setSelectedRegion] = useState<string>("");
 
@@ -35,10 +36,11 @@ function App() {
   useEffect(() => {
     async function getCountries() {
       setIsLoading(true);
+      setError("");
 
       try {
         const res = await fetch(
-          "https://restcountries.com/v3.1/all?fields=flags,name,population,region,capital,cca3"
+          "https://restcountrides.com/v3.1/all?fields=flags,name,population,region,capital,cca3"
         );
         const data: Country[] = await res.json();
 
@@ -57,6 +59,7 @@ function App() {
         setCountries(sorted);
       } catch (error: any) {
         console.log(error);
+        setError("Failed to fetch data");
       } finally {
         setIsLoading(false);
       }
@@ -79,13 +82,18 @@ function App() {
             setSelectedRegion={setSelectedRegion}
           />
         </div>
-        {filteredCountries.length === 0 && (
+        {filteredCountries.length === 0 && !isLoading && !error && (
           <p className="text-gray-700 text-xl text-center mt-50">
             🤔 No countries found with matching criteria.
           </p>
         )}
+        {error && (
+          <p className="text-gray-700 text-xl text-center mt-50">🔴 {error}</p>
+        )}
+        {isLoading && (
+          <p className="text-gray-700 text-xl text-center mt-50">Loading...</p>
+        )}
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:gap-17 lg:grid-cols-3 xl:grid-cols-4 gap-10 pb-10">
-          {isLoading && <p>Loading...</p>}
           {!isLoading &&
             filteredCountries.map((country: Country) => (
               <CountryCard key={country.cca3} country={country} />
