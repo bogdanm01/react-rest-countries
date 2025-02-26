@@ -68,7 +68,7 @@ export default function Countries() {
   }, []);
 
   return (
-    <main className="max-w-7xl w-full my-0 mx-auto px-10 sm:px-4">
+    <main className="max-w-7xl w-full my-0 mx-auto px-6 sm:px-4">
       <div className="mb-12 flex flex-col items-start sm:flex-row gap-6 sm:gp-2 sm:justify-between sm:items-center w-full">
         <SearchField
           searchString={searchString}

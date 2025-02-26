@@ -59,7 +59,7 @@ function CountryPage() {
   if (!country) return null;
 
   return (
-    <div className="px-4 max-w-7xl w-full my-0 mx-auto">
+    <div className="px-4 max-w-7xl w-full my-0 mx-auto pb-10">
       <Link to="..">
         <button className="cursor-pointer inline-flex gap-2 items-center justify-center bg-white py-2 px-8 rounded-md shadow-md">
           <FontAwesomeIcon icon={faArrowLeft} />
@@ -71,7 +71,7 @@ function CountryPage() {
           <div className="flex-1/2">
             <img
               src={country.flags.svg}
-              className="sm:w-[420px]"
+              className="sm:w-[480px]"
               alt={`${country.name.common} flag`}
             />
           </div>
