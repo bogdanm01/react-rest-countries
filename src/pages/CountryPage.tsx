@@ -1,4 +1,4 @@
-import { AnyActionArg, useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Country } from "../types/Country";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,33 +27,36 @@ function CountryPage() {
     loadCountry();
   }, [code]);
 
-  if (!country) return null;
+  const mappedCountry = useMemo(() => {
+    const nativeNameObj = country?.name?.nativeName
+      ? (Object.values(country.name.nativeName)[0] as { common: string })
+      : undefined;
+    const nativeName = nativeNameObj?.common || "N/A";
 
-  let nativeName: { common: string } = { common: "N/A" };
-
-  if (country.name.nativeName) {
-    const obj = Object.values(country?.name.nativeName)[0] as {
-      common: string;
+    const name = {
+      ...country?.name,
+      nativeName,
     };
 
-    nativeName = obj;
-  }
+    const currencies = country?.currencies
+      ? (Object.values(country.currencies) as { name: string }[])
+          .map((currency) => currency.name)
+          .join(", ")
+      : "N/A";
 
-  let currencies: any = [];
+    const languages = country?.languages
+      ? Object.values(country.languages).join(", ")
+      : "N/A";
 
-  if (country.currencies) {
-    currencies = Object.values(country.currencies).map(
-      (currency) => currency.name
-    );
-  }
+    return {
+      ...country,
+      name,
+      currencies,
+      languages,
+    };
+  }, [country]);
 
-  let languages: any = [];
-
-  if (country.languages) {
-    languages = Object.entries(country.languages).map(([key, val]) => {
-      return val;
-    });
-  }
+  if (!country) return null;
 
   return (
     <div className="px-4 max-w-7xl w-full my-0 mx-auto">
@@ -81,7 +84,7 @@ function CountryPage() {
                 <li className="font-medium">
                   Native Name:{" "}
                   <span className="font-light">
-                    {nativeName?.common ?? "N/A"}
+                    {mappedCountry.name?.nativeName}
                   </span>
                 </li>
                 <li className="font-medium">
@@ -91,7 +94,8 @@ function CountryPage() {
                   </span>
                 </li>
                 <li className="font-medium">
-                  Region: <span className="font-light">{country.region}</span>
+                  Region:{" "}
+                  <span className="font-light">{mappedCountry.region}</span>
                 </li>
                 <li className="font-medium">
                   Sub Region:{" "}
@@ -108,11 +112,11 @@ function CountryPage() {
                 </li>
                 <li className="font-medium">
                   Currencies:{" "}
-                  <span className="font-light">{currencies.join(", ")}</span>
+                  <span className="font-light">{mappedCountry.currencies}</span>
                 </li>
                 <li className="font-medium">
                   Languages:{" "}
-                  <span className="font-light">{languages.join(", ")}</span>
+                  <span className="font-light">{mappedCountry.languages}</span>
                 </li>
               </ul>
             </div>
@@ -120,13 +124,13 @@ function CountryPage() {
               <span className="font-medium text-nowrap">Border Countries:</span>
               {country.borders ? (
                 <span className="flex gap-2 flex-wrap">
-                  {country.borders?.map((country) => (
-                    <Link to={`/${country}`}>
+                  {country.borders?.map((code) => (
+                    <Link to={`/${code}`} key={code}>
                       <span
-                        key={country}
+                        key={code}
                         className="bg-white px-4 py-1 text-sm rounded-sm shadow-sm cursor-pointer hover:bg-zinc-50"
                       >
-                        {country}
+                        {code}
                       </span>
                     </Link>
                   ))}
