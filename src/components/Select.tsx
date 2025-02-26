@@ -46,7 +46,7 @@ function RegionFilter({ selectedRegion, setSelectedRegion }: any) {
         </>
       )}
       <span
-        className="flex items-center gap-8 text-sm bg-white py-[18px] px-6 rounded-md shadow-md cursor-pointer"
+        className="flex items-center gap-8 text-md bg-white py-[16px] px-6 rounded-md shadow-md cursor-pointer"
         onClick={() => setIsDropdownOpen((val) => !val)}
       >
         Filter by Region
@@ -57,7 +57,7 @@ function RegionFilter({ selectedRegion, setSelectedRegion }: any) {
           <ul>
             {Object.values(REGIONS).map((region) => (
               <li
-                className="text-sm py-1 cursor-pointer hover:text-gray-400"
+                className="py-1 cursor-pointer hover:text-gray-500"
                 onClick={() => handleRegionSelect(region)}
               >
                 <span className="flex gap-1.5 items-center relative">
