@@ -71,7 +71,7 @@ function CountryPage() {
           <div className="flex-1/2 animate-fade-in-left">
             <img
               src={country.flags.svg}
-              className="sm:w-[480px]"
+              className="sm:w-[500px] shadow-lg rounded-md"
               alt={`${country.name.common} flag`}
             />
           </div>
