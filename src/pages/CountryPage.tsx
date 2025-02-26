@@ -67,7 +67,7 @@ function CountryPage() {
         </button>
       </Link>
       {!isLoading ? (
-        <div className="flex-col flex md:flex-row items-center mt-15 gap-3">
+        <div className="flex-col flex md:flex-row items-center mt-15 gap-5 md:gap-10 lg:gap-0">
           <div className="flex-1/2">
             <img
               src={country.flags.svg}
@@ -79,7 +79,7 @@ function CountryPage() {
             <h1 className="text-3xl font-extrabold mb-8 md:mt-0 mt-5">
               {country.name.common}
             </h1>
-            <div className="flex flex-col md:flex-row gap-10 md:gap-15">
+            <div className="flex flex-col lg:flex-row gap-7 lg:gap-15">
               <ul className="flex flex-col gap-3">
                 <li className="font-medium">
                   Native Name:{" "}
@@ -120,7 +120,7 @@ function CountryPage() {
                 </li>
               </ul>
             </div>
-            <div className="mt-10 flex flex-col md:flex-row gap-3 items-start">
+            <div className="mt-7 lg:mt-10 flex flex-col lg:flex-row gap-3 items-start">
               <span className="font-medium text-nowrap">Border Countries:</span>
               {country.borders ? (
                 <span className="flex gap-2 flex-wrap">
