@@ -68,14 +68,14 @@ function CountryPage() {
       </Link>
       {!isLoading ? (
         <div className="flex-col flex md:flex-row items-center mt-15 gap-5 md:gap-10 lg:gap-0">
-          <div className="flex-1/2">
+          <div className="flex-1/2 animate-fade-in-left">
             <img
               src={country.flags.svg}
               className="sm:w-[480px]"
               alt={`${country.name.common} flag`}
             />
           </div>
-          <div className="flex flex-col self-start md:self-auto flex-1/2">
+          <div className="flex flex-col self-start md:self-auto flex-1/2 animate-fade-in">
             <h1 className="text-3xl font-extrabold mb-8 md:mt-0 mt-5">
               {country.name.common}
             </h1>
