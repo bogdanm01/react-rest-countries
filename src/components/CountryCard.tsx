@@ -10,6 +10,7 @@ function CountryCard({ country }: CountryCardProps) {
       <img
         src={country.flags.png}
         className="sm:h-38 sm:max-h-40 lg:h-40 rounded-t-lg w-full bg-center object-center object-fill"
+        alt={`${country.name.common} flag`}
       />
       <div className="flex flex-col p-7 pb-10 dark:text-very-light-gray">
         <h2 className="font-bold text-lg mb-2">{country.name.common}</h2>
