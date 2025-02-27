@@ -5,6 +5,8 @@ import RegionFilter from "../components/Select";
 import { Country } from "../types/Country";
 import { Link } from "react-router-dom";
 
+const BASE_URL = "https://restcountries.com/v3.1";
+
 export default function Countries() {
   const [countries, setCountries] = useState<Country[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -39,7 +41,7 @@ export default function Countries() {
 
       try {
         const res = await fetch(
-          "https://restcountries.com/v3.1/all?fields=flags,name,population,region,capital,cca3"
+          `${BASE_URL}/all?fields=flags,name,population,region,capital,cca3`
         );
         const data: Country[] = await res.json();
 
