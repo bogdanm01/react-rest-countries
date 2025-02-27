@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-dark-blue: hsl(209, 23%, 22%);
   --color-very-dark-blue-elements: hsl(207, 26%, 17%);
@@ -36,4 +38,8 @@
 body {
   font-family: "Nunito Sans";
   background-color: var(--color-very-light-gray);
+
+  &.dark {
+    background-color: var(--color-very-dark-blue-elements);
+  }
 }

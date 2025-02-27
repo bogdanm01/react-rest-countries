@@ -82,7 +82,7 @@ function CountryPage() {
   return (
     <div className="px-4 max-w-7xl w-full my-0 mx-auto pb-10">
       <Link to="..">
-        <button className="cursor-pointer inline-flex gap-2 items-center justify-center bg-white hover:bg-zinc-50 py-2 px-8 rounded-md shadow-md">
+        <button className="cursor-pointer inline-flex gap-2 items-center justify-center bg-white dark:bg-dark-blue dark:text-very-light-gray hover:bg-zinc-50 hover:dark:bg-very-dark-blue-elements py-2 px-8 rounded-md shadow-md">
           <FaArrowLeft />
           Back
         </button>
@@ -96,7 +96,7 @@ function CountryPage() {
               alt={`${country.name.common} flag`}
             />
           </div>
-          <div className="flex flex-col self-start md:self-auto flex-1/2 animate-fade-in">
+          <div className="flex flex-col self-start md:self-auto flex-1/2 animate-fade-in dark:text-very-light-gray">
             <h1 className="text-3xl font-extrabold mb-8 md:mt-0 mt-5">
               {country.name.common}
             </h1>
@@ -149,7 +149,7 @@ function CountryPage() {
                     <Link to={`/${code.cca3}`} key={code}>
                       <span
                         key={code.cca3}
-                        className="bg-white px-4 py-1 text-sm rounded-sm shadow-sm cursor-pointer hover:bg-zinc-50"
+                        className="bg-white dark:bg-dark-blue px-4 py-1 text-sm rounded-sm shadow-sm cursor-pointer hover:bg-zinc-50 hover:dark:bg-very-dark-blue-elements"
                       >
                         {code.name}
                       </span>

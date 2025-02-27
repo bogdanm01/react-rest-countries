@@ -39,19 +39,22 @@ function RegionFilter({ selectedRegion, setSelectedRegion }: any) {
   }
 
   return (
-    <div className="relative text-gray-700 select-none shrink-0" ref={ref}>
+    <div
+      className="relative text-gray-700 dark:text-gray-100 select-none shrink-0"
+      ref={ref}
+    >
       {selectedRegion !== "" && (
         <div className="w-[8px] h-[8px] absolute bg-very-dark-blue-elements rounded-full -top-0.5 -right-0.5" />
       )}
       <span
-        className="flex items-center gap-8 text-md bg-white py-[16px] px-6 rounded-md shadow-md cursor-pointer"
+        className="flex items-center gap-8 text-md bg-white dark:bg-dark-blue py-[16px] px-6 rounded-md shadow-md cursor-pointer"
         onClick={() => setIsDropdownOpen((val) => !val)}
       >
         Filter by Region
         <FaChevronDown size="0.85em" />
       </span>
       {isDropdownOpen && (
-        <div className="absolute bg-white w-full rounded-md shadow-md top-15 py-3 px-8 z-2">
+        <div className="absolute bg-white dark:bg-dark-blue w-full rounded-md shadow-md top-15 py-3 px-8 z-2">
           <ul>
             {Object.values(REGIONS).map((region) => (
               <li
