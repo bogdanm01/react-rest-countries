@@ -12,14 +12,14 @@ interface ThemeContextType {
   setTheme: Dispatch<SetStateAction<string>>;
 }
 
+interface ThemeContextProviderProps {
+  children: ReactNode;
+}
+
 const ThemeContext = createContext<ThemeContextType>({
   theme: "",
   setTheme: () => {},
 });
-
-interface ThemeContextProviderProps {
-  children: ReactNode;
-}
 
 function ThemeContextProvider({ children }: ThemeContextProviderProps) {
   const [theme, setTheme] = useState(() => {

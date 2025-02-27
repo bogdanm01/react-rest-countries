@@ -1,10 +1,11 @@
 import "./App.css";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AppLayout from "./pages/AppLayout.tsx";
+import { ThemeContextProvider } from "./context/ThemeContext.tsx";
+
+import AppLayout from "./components/AppLayout.tsx";
 import Countries from "./pages/CountriesPage.tsx";
 import CountryPage from "./pages/CountryPage.tsx";
-import { ThemeContextProvider } from "./context/ThemeContext.tsx";
 
 function App() {
   return (

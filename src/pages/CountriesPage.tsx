@@ -1,25 +1,22 @@
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import SearchField from "../components/SearchField";
 import CountryCard from "../components/CountryCard";
 import RegionFilter from "../components/Select";
 import { Country } from "../types/Country";
 import { Link } from "react-router-dom";
-
-const BASE_URL = "https://restcountries.com/v3.1";
+import { CountriesContext } from "../context/CountriesContext";
 
 export default function Countries() {
-  const [countries, setCountries] = useState<Country[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
-  const [searchString, setSearchString] = useState<string>("");
-  const [selectedRegion, setSelectedRegion] = useState<string>("");
+  const { countries, isLoading, error }: any = useContext(CountriesContext);
+  const [searchString, setSearchString] = useState("");
+  const [selectedRegion, setSelectedRegion] = useState("");
 
   const filteredCountries = useMemo(() => {
     let filtered = [];
 
     if (searchString.length >= 3) {
       filtered = countries.filter(
-        (c) =>
+        (c: Country) =>
           c.name.common.toLowerCase().includes(searchString.toLowerCase()) ||
           c.name.official.toLowerCase().includes(searchString.toLowerCase())
       );
@@ -28,41 +25,11 @@ export default function Countries() {
     }
 
     if (selectedRegion !== "") {
-      filtered = filtered.filter((c) => c.region === selectedRegion);
+      filtered = filtered.filter((c: Country) => c.region === selectedRegion);
     }
 
     return filtered;
   }, [countries, searchString, selectedRegion]);
-
-  useEffect(() => {
-    async function getCountries() {
-      setIsLoading(true);
-      setError("");
-
-      try {
-        const res = await fetch(
-          `${BASE_URL}/all?fields=flags,name,population,region,capital,cca3`
-        );
-        const data: Country[] = await res.json();
-
-        const sorted = data.sort((a, b) => {
-          const aName = a.name.common;
-          const bName = b.name.common;
-
-          return aName.localeCompare(bName, "en-US", { sensitivity: "base" });
-        });
-
-        setCountries(sorted);
-      } catch (error: any) {
-        console.log(error);
-        setError("Failed to fetch data");
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    getCountries();
-  }, []);
 
   return (
     <main className="max-w-7xl w-full my-0 mx-auto px-6 sm:px-4">

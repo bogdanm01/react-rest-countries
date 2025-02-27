@@ -1,14 +1,13 @@
-import Header from "../components/Header";
+import Header from "./Header";
 import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
-import { useThemeContext } from "../context/useThemeContext";
+import { useThemeContext } from "../hooks/useThemeContext";
+import { CountriesContextProvider } from "../context/CountriesContext";
 
 function AppLayout() {
   const { theme } = useThemeContext();
 
   useEffect(() => {
-    console.log(theme);
-
     if (theme === "dark") {
       document.getElementById("body")?.classList.add("dark");
     } else {
@@ -19,7 +18,9 @@ function AppLayout() {
   return (
     <>
       <Header />
-      <Outlet />
+      <CountriesContextProvider>
+        <Outlet />
+      </CountriesContextProvider>
     </>
   );
 }

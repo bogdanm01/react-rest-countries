@@ -1,52 +1,13 @@
-import { useEffect, useState, useMemo } from "react";
+import { useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Country } from "../types/Country";
 import { FaArrowLeft } from "react-icons/fa6";
-
-const BASE_URL = "https://restcountries.com/v3.1";
+import CountryDetails from "../components/CountryDetails";
+import Chip from "../components/Chip";
+import { useFetchCountry } from "../hooks/useFetchCountry";
 
 function CountryPage() {
   const { code } = useParams();
-  const [country, setCountry] = useState<Country | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    async function loadCountry() {
-      try {
-        setIsLoading(true);
-        const res = await fetch(`${BASE_URL}/alpha/${code}`);
-        const data = await res.json();
-        let country: Country = data[0];
-
-        const borderCodes = country.borders?.map((b) => b);
-        let borderCountries = [];
-
-        if (borderCodes?.length) {
-          const borderRes = await fetch(
-            `${BASE_URL}/alpha?codes=${borderCodes}&fields=name,cca3`
-          );
-          const borderCountriesData = await borderRes.json();
-
-          borderCountries = borderCountriesData.map((country: any) => {
-            return { cca3: country.cca3, name: country.name.common };
-          });
-        }
-
-        country = {
-          ...country,
-          borders: borderCountries,
-        };
-
-        setCountry(country);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    loadCountry();
-  }, [code]);
+  const { country, isLoading } = useFetchCountry(code!);
 
   const mappedCountry = useMemo(() => {
     const nativeNameObj = country?.name?.nativeName
@@ -87,7 +48,7 @@ function CountryPage() {
           Back
         </button>
       </Link>
-      {!isLoading ? (
+      {!isLoading && (
         <div className="flex-col flex md:flex-row items-center mt-15 gap-5 md:gap-10 lg:gap-0">
           <div className="flex-1/2 animate-fade-in-left">
             <img
@@ -100,70 +61,28 @@ function CountryPage() {
             <h1 className="text-3xl font-extrabold mb-8 md:mt-0 mt-5">
               {country.name.common}
             </h1>
-            <div className="flex flex-col lg:flex-row gap-7 lg:gap-15">
-              <ul className="flex flex-col gap-3">
-                <li className="font-medium">
-                  Native Name:{" "}
-                  <span className="font-light">
-                    {mappedCountry.name?.nativeName}
+            <CountryDetails country={mappedCountry} />
+            <footer className="mt-7 lg:mt-10 flex flex-col lg:flex-row gap-3 items-start">
+              {mappedCountry.borders && mappedCountry.borders.length > 0 && (
+                <>
+                  <span className="font-medium text-nowrap">
+                    Border Countries:
                   </span>
-                </li>
-                <li className="font-medium">
-                  Population:{" "}
-                  <span className="font-light">
-                    {country.population.toLocaleString()}
-                  </span>
-                </li>
-                <li className="font-medium">
-                  Region:{" "}
-                  <span className="font-light">{mappedCountry.region}</span>
-                </li>
-                <li className="font-medium">
-                  Sub Region:{" "}
-                  <span className="font-light">{country.subregion}</span>
-                </li>
-                <li className="font-medium">
-                  Capital: <span className="font-light">{country.capital}</span>
-                </li>
-              </ul>
-              <ul className="flex flex-col gap-3">
-                <li className="font-medium">
-                  Top Level Domain:{" "}
-                  <span className="font-light">{country.tld}</span>
-                </li>
-                <li className="font-medium">
-                  Currencies:{" "}
-                  <span className="font-light">{mappedCountry.currencies}</span>
-                </li>
-                <li className="font-medium">
-                  Languages:{" "}
-                  <span className="font-light">{mappedCountry.languages}</span>
-                </li>
-              </ul>
-            </div>
-            <div className="mt-7 lg:mt-10 flex flex-col lg:flex-row gap-3 items-start">
-              <span className="font-medium text-nowrap">Border Countries:</span>
-              {country.borders ? (
-                <span className="flex gap-2 flex-wrap">
-                  {country.borders?.map((code: any) => (
-                    <Link to={`/${code.cca3}`} key={code}>
-                      <span
-                        key={code.cca3}
-                        className="bg-white dark:bg-dark-blue px-4 py-1 text-sm rounded-sm shadow-sm cursor-pointer hover:bg-zinc-50 hover:dark:bg-very-dark-blue-elements"
+                  <span className="flex gap-2 flex-wrap">
+                    {mappedCountry.borders?.map((borderCountry: any) => (
+                      <Link
+                        to={`/${borderCountry.cca3}`}
+                        key={borderCountry.cca3}
                       >
-                        {code.name}
-                      </span>
-                    </Link>
-                  ))}
-                </span>
-              ) : (
-                "N/A"
+                        <Chip>{borderCountry.name}</Chip>
+                      </Link>
+                    ))}
+                  </span>
+                </>
               )}
-            </div>
+            </footer>
           </div>
         </div>
-      ) : (
-        <p className="text-xl font-medium text-gray-700 mt-20">Loading...</p>
       )}
     </div>
   );

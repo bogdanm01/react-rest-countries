@@ -1,7 +1,7 @@
 import { FaRegMoon } from "react-icons/fa";
 
 import { memo } from "react";
-import { useThemeContext } from "../context/useThemeContext";
+import { useThemeContext } from "../hooks/useThemeContext";
 
 function Header() {
   const { theme, setTheme } = useThemeContext();
