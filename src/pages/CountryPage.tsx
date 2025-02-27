@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { Country } from "../types/Country";
 import { FaArrowLeft } from "react-icons/fa6";
 
-const BASE_URL = "https://restcountries.com/v3.1/alpha";
+const BASE_URL = "https://restcountries.com/v3.1";
 
 function CountryPage() {
   const { code } = useParams();
@@ -14,10 +14,30 @@ function CountryPage() {
     async function loadCountry() {
       try {
         setIsLoading(true);
-        const res = await fetch(`${BASE_URL}/${code}`);
+        const res = await fetch(`${BASE_URL}/alpha/${code}`);
         const data = await res.json();
+        let country: Country = data[0];
 
-        setCountry(data[0]);
+        const borderCodes = country.borders?.map((b) => b);
+        let borderCountries = [];
+
+        if (borderCodes?.length) {
+          const borderRes = await fetch(
+            `${BASE_URL}/alpha?codes=${borderCodes}&fields=name,cca3`
+          );
+          const borderCountriesData = await borderRes.json();
+
+          borderCountries = borderCountriesData.map((country: any) => {
+            return { cca3: country.cca3, name: country.name.common };
+          });
+        }
+
+        country = {
+          ...country,
+          borders: borderCountries,
+        };
+
+        setCountry(country);
       } catch (error) {
         console.log(error);
       } finally {
@@ -62,7 +82,7 @@ function CountryPage() {
   return (
     <div className="px-4 max-w-7xl w-full my-0 mx-auto pb-10">
       <Link to="..">
-        <button className="cursor-pointer inline-flex gap-2 items-center justify-center bg-white py-2 px-8 rounded-md shadow-md">
+        <button className="cursor-pointer inline-flex gap-2 items-center justify-center bg-white hover:bg-zinc-50 py-2 px-8 rounded-md shadow-md">
           <FaArrowLeft />
           Back
         </button>
@@ -125,13 +145,13 @@ function CountryPage() {
               <span className="font-medium text-nowrap">Border Countries:</span>
               {country.borders ? (
                 <span className="flex gap-2 flex-wrap">
-                  {country.borders?.map((code) => (
-                    <Link to={`/${code}`} key={code}>
+                  {country.borders?.map((code: any) => (
+                    <Link to={`/${code.cca3}`} key={code}>
                       <span
-                        key={code}
+                        key={code.cca3}
                         className="bg-white px-4 py-1 text-sm rounded-sm shadow-sm cursor-pointer hover:bg-zinc-50"
                       >
-                        {code}
+                        {code.name}
                       </span>
                     </Link>
                   ))}
