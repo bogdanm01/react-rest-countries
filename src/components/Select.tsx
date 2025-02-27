@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, memo } from "react";
 
 const REGIONS = Object.freeze({
   AFRICA: "Africa",
@@ -79,4 +79,4 @@ function RegionFilter({ selectedRegion, setSelectedRegion }: any) {
   );
 }
 
-export default RegionFilter;
+export default memo(RegionFilter);

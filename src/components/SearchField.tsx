@@ -1,7 +1,11 @@
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { memo } from "react";
 
-export default function SearchField({ searchString, setSearchString }: any) {
+export default memo(function SearchField({
+  searchString,
+  setSearchString,
+}: any) {
   return (
     <div className="bg-white flex shrink w-full sm:max-w-[450px] items-center gap-6 px-8 shadow-md rounded-md">
       <FontAwesomeIcon icon={faMagnifyingGlass} color="#666" />
@@ -14,4 +18,4 @@ export default function SearchField({ searchString, setSearchString }: any) {
       />
     </div>
   );
-}
+});
