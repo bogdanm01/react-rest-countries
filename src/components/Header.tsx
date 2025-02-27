@@ -1,10 +1,10 @@
 import { FaRegMoon } from "react-icons/fa";
 
-import { memo, useContext } from "react";
-import { ThemeContext } from "../context/ThemeContext";
+import { memo } from "react";
+import { useThemeContext } from "../context/useThemeContext";
 
 function Header() {
-  const { theme, setTheme }: any = useContext(ThemeContext);
+  const { theme, setTheme } = useThemeContext();
 
   function toggleDarkMode() {
     if (theme === "dark") {

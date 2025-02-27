@@ -1,10 +1,10 @@
 import Header from "../components/Header";
 import { Outlet } from "react-router-dom";
-import { ThemeContext } from "../context/ThemeContext";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
+import { useThemeContext } from "../context/useThemeContext";
 
 function AppLayout() {
-  const { theme }: any = useContext(ThemeContext);
+  const { theme } = useThemeContext();
 
   useEffect(() => {
     console.log(theme);

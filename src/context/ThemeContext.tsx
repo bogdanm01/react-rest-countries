@@ -1,8 +1,27 @@
-import { createContext, useEffect, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 
-export const ThemeContext = createContext({});
+interface ThemeContextType {
+  theme: string;
+  setTheme: Dispatch<SetStateAction<string>>;
+}
 
-export function ThemeContextProvider({ children }: any) {
+const ThemeContext = createContext<ThemeContextType>({
+  theme: "",
+  setTheme: () => {},
+});
+
+interface ThemeContextProviderProps {
+  children: ReactNode;
+}
+
+function ThemeContextProvider({ children }: ThemeContextProviderProps) {
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem("theme") || "light";
   });
@@ -17,3 +36,5 @@ export function ThemeContextProvider({ children }: any) {
     </ThemeContext.Provider>
   );
 }
+
+export { ThemeContext, ThemeContextProvider };
