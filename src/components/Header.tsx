@@ -1,5 +1,5 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon } from "@fortawesome/free-regular-svg-icons";
+import { FaRegMoon } from "react-icons/fa";
+
 import { memo } from "react";
 
 function Header() {
@@ -10,7 +10,7 @@ function Header() {
           Where in the world?
         </h1>
         <button className="text-sm sm:text-[1rem] cursor-pointer font-semibold flex gap-2 items-center py-2 px-3 hover:bg-zinc-50 rounded-md">
-          <FontAwesomeIcon icon={faMoon} size="lg" />
+          <FaRegMoon />
           Dark Mode
         </button>
       </div>

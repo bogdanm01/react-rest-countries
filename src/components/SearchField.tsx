@@ -1,14 +1,13 @@
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { memo } from "react";
+import { IoMdSearch } from "react-icons/io";
 
 export default memo(function SearchField({
   searchString,
   setSearchString,
 }: any) {
   return (
-    <div className="bg-white flex shrink w-full sm:max-w-[450px] items-center gap-6 px-8 shadow-md rounded-md">
-      <FontAwesomeIcon icon={faMagnifyingGlass} color="#666" />
+    <div className="bg-white flex shrink w-full sm:max-w-[450px] items-center gap-5 px-8 shadow-md rounded-md">
+      <IoMdSearch color="#666" size="1.25em" />
       <input
         type="text"
         value={searchString}

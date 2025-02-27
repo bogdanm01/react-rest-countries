@@ -44,15 +44,10 @@ export default function Countries() {
         const data: Country[] = await res.json();
 
         const sorted = data.sort((a, b) => {
-          if (a.name.common.toLowerCase() < b.name.common.toLowerCase()) {
-            return -1;
-          }
+          const aName = a.name.common;
+          const bName = b.name.common;
 
-          if (a.name.common.toLowerCase() > b.name.common.toLowerCase()) {
-            return 1;
-          }
-
-          return 0;
+          return aName.localeCompare(bName, "en-US", { sensitivity: "base" });
         });
 
         setCountries(sorted);

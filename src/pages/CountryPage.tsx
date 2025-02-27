@@ -1,8 +1,9 @@
 import { useEffect, useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Country } from "../types/Country";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { FaArrowLeft } from "react-icons/fa6";
+
+const BASE_URL = "https://restcountries.com/v3.1/alpha";
 
 function CountryPage() {
   const { code } = useParams();
@@ -13,7 +14,7 @@ function CountryPage() {
     async function loadCountry() {
       try {
         setIsLoading(true);
-        const res = await fetch(`https://restcountries.com/v3.1/alpha/${code}`);
+        const res = await fetch(`${BASE_URL}/${code}`);
         const data = await res.json();
 
         setCountry(data[0]);
@@ -62,7 +63,7 @@ function CountryPage() {
     <div className="px-4 max-w-7xl w-full my-0 mx-auto pb-10">
       <Link to="..">
         <button className="cursor-pointer inline-flex gap-2 items-center justify-center bg-white py-2 px-8 rounded-md shadow-md">
-          <FontAwesomeIcon icon={faArrowLeft} />
+          <FaArrowLeft />
           Back
         </button>
       </Link>

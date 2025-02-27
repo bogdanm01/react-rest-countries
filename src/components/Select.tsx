@@ -1,6 +1,6 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState, useRef, memo } from "react";
+import { FaChevronDown } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa6";
 
 const REGIONS = Object.freeze({
   AFRICA: "Africa",
@@ -41,16 +41,14 @@ function RegionFilter({ selectedRegion, setSelectedRegion }: any) {
   return (
     <div className="relative text-gray-700 select-none shrink-0" ref={ref}>
       {selectedRegion !== "" && (
-        <>
-          <div className="w-[8px] h-[8px] absolute bg-very-dark-blue-elements rounded-full -top-0.5 -right-0.5"></div>
-        </>
+        <div className="w-[8px] h-[8px] absolute bg-very-dark-blue-elements rounded-full -top-0.5 -right-0.5" />
       )}
       <span
         className="flex items-center gap-8 text-md bg-white py-[16px] px-6 rounded-md shadow-md cursor-pointer"
         onClick={() => setIsDropdownOpen((val) => !val)}
       >
         Filter by Region
-        <FontAwesomeIcon icon={faChevronDown} size="xs" />
+        <FaChevronDown size="0.85em" />
       </span>
       {isDropdownOpen && (
         <div className="absolute bg-white w-full rounded-md shadow-md top-15 py-3 px-8 z-2">
@@ -62,11 +60,7 @@ function RegionFilter({ selectedRegion, setSelectedRegion }: any) {
               >
                 <span className="flex gap-1.5 items-center relative">
                   {selectedRegion === region && (
-                    <FontAwesomeIcon
-                      className="absolute -left-3.5"
-                      icon={faCheck}
-                      size="sm"
-                    />
+                    <FaCheck className="absolute -left-3.5" size="0.75em" />
                   )}
                   {region}
                 </span>
