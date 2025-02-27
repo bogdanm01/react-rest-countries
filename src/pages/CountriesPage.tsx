@@ -44,7 +44,7 @@ export default function Countries() {
         />
       </div>
       {filteredCountries.length === 0 && !isLoading && !error && (
-        <p className="text-gray-700 text-xl text-center mt-50">
+        <p className="text-gray-700 dark:text-gray-200 text-xl text-center mt-50">
           🤔 No countries found with matching criteria.
         </p>
       )}
