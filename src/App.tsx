@@ -4,8 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./pages/AppLayout.tsx";
 import Countries from "./pages/CountriesPage.tsx";
 import CountryPage from "./pages/CountryPage.tsx";
-import { useContext, useEffect } from "react";
-import { ThemeContext, ThemeContextProvider } from "./context/ThemeContext.tsx";
+import { ThemeContextProvider } from "./context/ThemeContext.tsx";
 
 function App() {
   return (
