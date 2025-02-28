@@ -2,7 +2,7 @@
 This app integrates with rest countries api and allows users to explore different countries of the world. 
 
 ## Features
-- Search
+- Searching for a country
 - Filtering by region
 - Local storage persisted theme toggle
 - Routing
