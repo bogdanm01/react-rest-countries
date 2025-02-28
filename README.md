@@ -1,6 +1,16 @@
 # React REST Countries
 This app integrates with rest countries api and allows users to explore different countries of the world. 
-Featuring search, filtering and theme toggle with local storage persistance. Built with React, React Router and Tailwind.
+
+## Features
+- Search
+- Filtering by region
+- Local storage persisted theme toggle
+- Routing
+
+## Tech Stack
+- React 19 (Vite)
+- React Router V6
+- Tailwind V4
 
 Live Preview: https://react-rest-countries-pink.vercel.app/
 
