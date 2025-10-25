@@ -16,10 +16,11 @@ Live Preview: https://react-rest-countries-pink.vercel.app/
 
 ## How to Run
 Clone the Repository:
-git clone `<repository-url>`
+git clone `bogdanm01/react-rest-countries`
 
 Install Dependencies:
 `npm install`
 
 Start the Development Server:
 `npm run dev`
+
